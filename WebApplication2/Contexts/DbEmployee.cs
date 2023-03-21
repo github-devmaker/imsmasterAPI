@@ -9,6 +9,7 @@ public partial class DbEmployee : DbContext
 {
     public DbEmployee()
     {
+
     }
 
     public DbEmployee(DbContextOptions<DbEmployee> options)

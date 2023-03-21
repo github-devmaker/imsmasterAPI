@@ -3729,11 +3729,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\git\\WebApplication2\\WebApplication2\\imsmasterApi.csproj",
+      "projectUniqueName": "D:\\git\\imsmasterAPI\\WebApplication2\\imsmasterApi.csproj",
       "projectName": "imsmasterApi",
-      "projectPath": "D:\\git\\WebApplication2\\WebApplication2\\imsmasterApi.csproj",
+      "projectPath": "D:\\git\\imsmasterAPI\\WebApplication2\\imsmasterApi.csproj",
       "packagesPath": "C:\\Users\\peerapong.k.ITNB17_41256\\.nuget\\packages\\",
-      "outputPath": "D:\\git\\WebApplication2\\WebApplication2\\obj\\",
+      "outputPath": "D:\\git\\imsmasterAPI\\WebApplication2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\peerapong.k.ITNB17_41256\\AppData\\Roaming\\NuGet\\NuGet.Config",

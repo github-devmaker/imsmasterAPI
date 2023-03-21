@@ -1,9 +1,9 @@
-D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\WebApplication2.exe
+D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\imsmasterApi.exe
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\appsettings.json
-D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\WebApplication2.dll
-D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\WebApplication2.runtimeconfig.json
-D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\WebApplication2.pdb
+D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\imsmasterApi.dll
+D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\imsmasterApi.runtimeconfig.json
+D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\imsmasterApi.pdb
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\Azure.Core.dll
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\Azure.Identity.dll
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
@@ -58,4 +58,4 @@ D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\runtimes\wi
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\WebApplication2.deps.json
+D:\git\WebApplication2\WebApplication2\obj\Release\net6.0\PubTmp\Out\imsmasterApi.deps.json

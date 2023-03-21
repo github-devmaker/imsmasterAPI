@@ -250,11 +250,14 @@ namespace WebApplication2.Controllers
         {
             string fac = data.Fac;
             string line = data.Line;
+            string message = "";
             int count = 0;
-            var context = _contextDbSCM.PnCompressors.Where(x => x.ModelCode == data.NewModelCode).FirstOrDefault();
+            var context = _contextDbSCM.PnCompressors.Where(x => x.ModelCode == data.NewModelCode);
+            message = context.Count() == 0 ? "ไม่พบข้อมูลโมเดลนี้" : "";
             if (fac == "1")
             {
                 count = _contextFac1.EtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
+                context = context.Where(x => x.Model.Contains("1Y"));
             }
             else if (fac == "2")
             {
@@ -266,19 +269,23 @@ namespace WebApplication2.Controllers
                 {
                     count = _contextFac2.EtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
                 }
+                context = context.Where(x => x.Model.Contains("2Y"));
             }
             else if (fac == "3")
             {
                 if (line == "Mecha line 8")
                 {
                     count = _contextFac3Line8.McEtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
+                    context = context.Where(x => (x.Model.Contains("1Y") || x.Model.Contains("2Y")) && x.Line == 8);
                 }
                 else
                 {
                     count = _contextFac3Line6.EtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
+                    context = context.Where(x => (x.Model.Contains("1Y") || x.Model.Contains("2Y")) && x.Line == 6);
                 }
             }
-            return Ok(new { content=context,count=count });
+            message = (context.Count() == 0 && message == "") ? "โมเดลไม่ได้อยู่ในพื้นที่" : "";
+            return Ok(new { content=context.FirstOrDefault(), count=count,message=message });
         }
 
         [HttpPost]
