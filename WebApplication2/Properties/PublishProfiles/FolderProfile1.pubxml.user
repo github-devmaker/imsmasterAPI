@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\git\imsmasterAPI\WebApplication2\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2024-07-01T10:08:35.3184303Z;True|2024-07-01T11:27:52.4445940+07:00;True|2023-10-12T16:07:29.9410211+07:00;True|2023-10-12T15:35:03.2240238+07:00;True|2023-10-12T15:34:57.4550191+07:00;True|2023-06-09T14:57:49.3536653+07:00;True|2023-06-09T14:48:06.6360289+07:00;True|2023-06-09T14:43:27.8461275+07:00;True|2023-06-09T13:43:23.0982921+07:00;True|2023-06-09T12:40:25.4989598+07:00;True|2023-06-09T12:35:01.9220497+07:00;True|2023-06-09T12:25:40.0255985+07:00;True|2023-06-09T12:16:42.1488999+07:00;True|2023-06-09T10:52:54.4866372+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

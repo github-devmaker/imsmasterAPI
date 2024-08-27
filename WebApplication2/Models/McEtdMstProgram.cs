@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplication2.Models;
+namespace imsmasterApi.Models;
 
 public partial class McEtdMstProgram
 {

@@ -1,0 +1,3 @@
+Scaffold-DbContext "Server=192.168.226.86;Database=dbSCM;TrustServerCertificate=True;uid=sa;password=decjapan" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force -t  vi_APS_PartMaster,APS_ProductionPlan,DictMstr,APS_ProductionPlan_Notice,WMS_MDW27_MODEL_MASTER -Context DBSCM  -ContextDir "Contexts"
+// FAC3IOT8
+Scaffold-DbContext "Server=10.194.122.103;Database=ETD_FAC3_PH2;TrustServerCertificate=True;uid=sa;password=decjapan" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -force -t MC_etd_group_rank,MC_etd_model_detail,MC_etd_mst_model,MC_etd_mst_part,MC_etd_mst_part_type,MC_etd_mst_program,MC_etd_mst_rank,MC_etd_program_detail  -Context DbIoTFac3Line8  -ContextDir "Contexts"

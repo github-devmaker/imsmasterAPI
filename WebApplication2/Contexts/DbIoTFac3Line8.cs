@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using WebApplication2.Models;
+using imsmasterApi.Models;
 
-namespace WebApplication2.Contexts;
+namespace imsmasterApi.Contexts;
 
 public partial class DbIoTFac3Line8 : DbContext
 {
@@ -40,9 +40,9 @@ public partial class DbIoTFac3Line8 : DbContext
     {
         modelBuilder.Entity<McEtdGroupRank>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_group_rank");
+            entity.HasKey(e => e.GId);
+
+            entity.ToTable("MC_etd_group_rank");
 
             entity.Property(e => e.GId)
                 .HasMaxLength(20)
@@ -60,22 +60,26 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdModelDetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_model_detail");
+            entity.HasKey(e => new { e.MId, e.PId, e.PtId });
+
+            entity.ToTable("MC_etd_model_detail");
 
             entity.Property(e => e.MId)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("m_id");
-            entity.Property(e => e.PCycletime).HasColumnName("p_cycletime");
-            entity.Property(e => e.PDate)
-                .HasColumnType("smalldatetime")
-                .HasColumnName("p_date");
             entity.Property(e => e.PId)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("p_id");
+            entity.Property(e => e.PtId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("pt_id");
+            entity.Property(e => e.PCycletime).HasColumnName("p_cycletime");
+            entity.Property(e => e.PDate)
+                .HasColumnType("smalldatetime")
+                .HasColumnName("p_date");
             entity.Property(e => e.PMaxDimension).HasColumnName("p_max_dimension");
             entity.Property(e => e.PMidDimension).HasColumnName("p_mid_dimension");
             entity.Property(e => e.PMinDimension).HasColumnName("p_min_dimension");
@@ -84,10 +88,6 @@ public partial class DbIoTFac3Line8 : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("p_user");
-            entity.Property(e => e.PtId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("pt_id");
             entity.Property(e => e.RId)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -96,16 +96,16 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdMstModel>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_mst_model");
+            entity.HasKey(e => e.MId);
 
-            entity.Property(e => e.MDate)
-                .HasColumnType("smalldatetime")
-                .HasColumnName("m_date");
+            entity.ToTable("MC_etd_mst_model");
+
             entity.Property(e => e.MId)
                 .HasMaxLength(20)
                 .HasColumnName("m_id");
+            entity.Property(e => e.MDate)
+                .HasColumnType("smalldatetime")
+                .HasColumnName("m_date");
             entity.Property(e => e.MName)
                 .HasMaxLength(50)
                 .HasColumnName("m_name");
@@ -116,11 +116,13 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdMstPart>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_mst_part");
+            entity.HasKey(e => e.PId);
 
-            entity.Property(e => e.PId).HasColumnName("p_id");
+            entity.ToTable("MC_etd_mst_part");
+
+            entity.Property(e => e.PId)
+                .ValueGeneratedNever()
+                .HasColumnName("p_id");
             entity.Property(e => e.PName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -129,11 +131,13 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdMstPartType>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_mst_part_type");
+            entity.HasKey(e => e.PtId);
 
-            entity.Property(e => e.PtId).HasColumnName("pt_id");
+            entity.ToTable("MC_etd_mst_part_type");
+
+            entity.Property(e => e.PtId)
+                .ValueGeneratedNever()
+                .HasColumnName("pt_id");
             entity.Property(e => e.PtName)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -142,11 +146,13 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdMstProgram>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_mst_program");
+            entity.HasKey(e => e.ProId);
 
-            entity.Property(e => e.ProId).HasColumnName("pro_id");
+            entity.ToTable("MC_etd_mst_program");
+
+            entity.Property(e => e.ProId)
+                .ValueGeneratedNever()
+                .HasColumnName("pro_id");
             entity.Property(e => e.ProName)
                 .HasMaxLength(100)
                 .IsUnicode(false)
@@ -159,15 +165,17 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdMstRank>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_mst_rank");
+            entity.HasKey(e => e.RId);
 
+            entity.ToTable("MC_etd_mst_rank");
+
+            entity.Property(e => e.RId)
+                .ValueGeneratedNever()
+                .HasColumnName("r_id");
             entity.Property(e => e.RColor)
                 .HasMaxLength(10)
                 .IsUnicode(false)
                 .HasColumnName("r_color");
-            entity.Property(e => e.RId).HasColumnName("r_id");
             entity.Property(e => e.RName)
                 .HasMaxLength(10)
                 .IsUnicode(false)
@@ -176,9 +184,9 @@ public partial class DbIoTFac3Line8 : DbContext
 
         modelBuilder.Entity<McEtdProgramDetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("MC_etd_program_detail");
+            entity.HasKey(e => e.MId);
+
+            entity.ToTable("MC_etd_program_detail");
 
             entity.Property(e => e.MId)
                 .HasMaxLength(20)
@@ -190,22 +198,4 @@ public partial class DbIoTFac3Line8 : DbContext
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-    public dynamic getFilter(MOther obj)
-    {
-        string proId = (obj.proId != "" && obj.proId != null) ? obj.proId.ToString() : "";
-        var listProgram = McEtdMstPrograms.ToList();
-        var result = (from mstProd in listProgram
-                      join prodDetail in McEtdProgramDetails
-                      on mstProd.ProId equals prodDetail.ProId
-                      join mstModel in McEtdMstModels
-                      on prodDetail.MId equals mstModel.MId
-                      select new { mstProd.ProId, mstProd.ProName, prodDetail.MId, mstModel.MName }).ToList();
-        if (proId == "")
-        {
-            proId = result.ToList()[0].ProId.ToString();
-        }
-        var listModel = result.Where(x => x.ProId.ToString() == proId).ToList().DistinctBy(x => x.MName).OrderBy(x => x.MName);
-        var modelSelected = listModel.ToList().Count > 0 ? listModel.ToList()[0].MId : "";
-        return new { id = proId, program = listProgram, model = listModel, modelSelected = modelSelected };
-    }
 }

@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>D:\git\WebApplication2\WebApplication2\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-03-21T05:32:06.3675327Z;True|2023-03-15T18:30:39.6502261+07:00;True|2023-03-15T18:25:55.0031719+07:00;True|2023-03-15T18:23:01.6126240+07:00;True|2023-03-15T17:45:28.7852647+07:00;True|2023-03-15T17:41:46.5875330+07:00;True|2023-03-15T17:31:08.7252477+07:00;True|2023-03-15T13:28:28.7084490+07:00;</History>
+    <_PublishTargetUrl>D:\git\imsmasterAPI\WebApplication2\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2024-08-27T12:07:34.5730998Z;True|2023-03-21T12:32:06.3675327+07:00;True|2023-03-15T18:30:39.6502261+07:00;True|2023-03-15T18:25:55.0031719+07:00;True|2023-03-15T18:23:01.6126240+07:00;True|2023-03-15T17:45:28.7852647+07:00;True|2023-03-15T17:41:46.5875330+07:00;True|2023-03-15T17:31:08.7252477+07:00;True|2023-03-15T13:28:28.7084490+07:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

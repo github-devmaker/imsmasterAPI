@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using imsmasterApi;
+using imsmasterApi.Contexts;
+using imsmasterApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.OpenApi.Any;
@@ -17,10 +20,10 @@ namespace WebApplication2.Controllers
         private readonly DbIoTFac2 _contextFac2;
         private readonly DbIoTFac3Line6 _contextFac3Line6;
         private readonly DbIoTFac3Line8 _contextFac3Line8;
-        private readonly DbSCM _contextDbSCM;
+        private readonly DBSCM _contextDbSCM;
         private readonly DbHRM _contextDbHRM;
-
-        public ModelController(DbIoTFac1 contextFac1, DbIoTFac2 contextFac2, DbIoTFac3Line6 contextFac3Line6, DbIoTFac3Line8 contextFac3Line8, DbSCM contextDbSCM, DbHRM contextDbHRM)
+        private readonly Services service = new Services();
+        public ModelController(DbIoTFac1 contextFac1, DbIoTFac2 contextFac2, DbIoTFac3Line6 contextFac3Line6, DbIoTFac3Line8 contextFac3Line8, DBSCM contextDbSCM, DbHRM contextDbHRM)
         {
             _contextFac1 = contextFac1;
             _contextFac2 = contextFac2;
@@ -48,9 +51,9 @@ namespace WebApplication2.Controllers
             }
             else if (fac == "3")
             {
-               if (line == "Mecha line 8")
+               if (line == "Machine line 8")
                 {
-                    return Ok(_contextFac3Line8.getFilter(prams));
+                    return Ok(service.getFilterFac3IotMcL8(prams));
                 }
                 else
                 {
@@ -107,10 +110,10 @@ namespace WebApplication2.Controllers
             {
                if (line == "Machine")
                 {
-                    var ProgramDetail = _contextFac2.McEtdProgramDetails.ToList();
+                    var ProgramDetail = _contextFac2.EtdProgramDetails.ToList();
                     if (proId != "")
                     {
-                        ProgramDetail = _contextFac2.McEtdProgramDetails.Where(x => x.ProId.ToString() == proId).ToList();
+                        ProgramDetail = _contextFac2.EtdProgramDetails.Where(x => x.ProId.ToString() == proId).ToList();
                     }
                     if (model != "")
                     {
@@ -119,11 +122,11 @@ namespace WebApplication2.Controllers
                     var mIdList = ProgramDetail.Select(s => s.MId).ToList();
                     if (ProgramDetail.Count > 0)
                     {
-                        var a = _contextFac2.McEtdModelDetails.Where(x => mIdList.Select(x => x).Contains(x.MId)).ToList();
-                        var b = _contextFac2.McEtdMstParts.ToList();
-                        var c = _contextFac2.McEtdMstPartTypes.ToList();
-                        var dbGroupRank = _contextFac2.McEtdGroupRanks.ToList();
-                        var dbModelStd = _contextFac2.McEtdMstModels.ToList();
+                        var a = _contextFac2.EtdModelDetails.Where(x => mIdList.Select(x => x).Contains(x.MId)).ToList();
+                        var b = _contextFac2.EtdMstParts.ToList();
+                        var c = _contextFac2.EtdMstPartTypes.ToList();
+                        var dbGroupRank = _contextFac2.EtdGroupRanks.ToList();
+                        var dbModelStd = _contextFac2.EtdMstModels.ToList();
                         var result = from x in a
                                      join groupRank in dbGroupRank
                                      on x.RId equals groupRank.GId
@@ -173,7 +176,7 @@ namespace WebApplication2.Controllers
             }
             else if (prams.fac == "3")
             {
-                if (prams.line == "Mecha line 8")
+                if (prams.line == "Machine line 8")
                 {
                     var ProgramDetail = _contextFac3Line8.McEtdProgramDetails.ToList();
                     if (proId != "")
@@ -206,6 +209,38 @@ namespace WebApplication2.Controllers
                                      select new { x.PId, x.PtId, x.RId, groupRank.RName, y.PName, z.PtName, modelStd.MId, modelStd.MName, x.PMidDimension, x.PMaxDimension, x.PMinDimension, x.PCycletime, x.PDate, x.PUser, x.PStatus };
                         return Ok(result);
                     }
+                }
+                else if(prams.line == "Machine")
+                {
+                    //var ProgramDetail = _contextFac2.McEtdProgramDetails.ToList();
+                    //if (proId != "")
+                    //{
+                    //    ProgramDetail = _contextFac2.McEtdProgramDetails.Where(x => x.ProId.ToString() == proId).ToList();
+                    //}
+                    //if (model != "")
+                    //{
+                    //    ProgramDetail = ProgramDetail.Where(x => x.MId == model).ToList();
+                    //}
+                    //var mIdList = ProgramDetail.Select(s => s.MId).ToList();
+                    //if (ProgramDetail.Count > 0)
+                    //{
+                    //    var a = _contextFac2.McEtdModelDetails.Where(x => mIdList.Select(x => x).Contains(x.MId)).ToList();
+                    //    var b = _contextFac2.McEtdMstParts.ToList();
+                    //    var c = _contextFac2.McEtdMstPartTypes.ToList();
+                    //    var dbGroupRank = _contextFac2.McEtdGroupRanks.ToList();
+                    //    var dbModelStd = _contextFac2.McEtdMstModels.ToList();
+                    //    var result = from x in a
+                    //                 join groupRank in dbGroupRank
+                    //                 on x.RId equals groupRank.GId
+                    //                 join modelStd in dbModelStd
+                    //                 on x.MId equals modelStd.MId
+                    //                 join y in b
+                    //                 on x.PId equals y.PId.ToString()
+                    //                 join z in c
+                    //                 on x.PtId equals z.PtId.ToString()
+                    //                 select new { x.PId, x.PtId, x.RId, groupRank.RName, y.PName, z.PtName, modelStd.MId, modelStd.MName, x.PMidDimension, x.PMaxDimension, x.PMinDimension, x.PCycletime, x.PDate, x.PUser, x.PStatus };
+                    //    return Ok(result);
+                    //}
                 }
                 else
                 {
@@ -263,7 +298,7 @@ namespace WebApplication2.Controllers
             {
                 if (line == "Machine")
                 {
-                    count = _contextFac2.McEtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
+                    count = _contextFac2.EtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
                 }
                 else
                 {
@@ -273,7 +308,7 @@ namespace WebApplication2.Controllers
             }
             else if (fac == "3")
             {
-                if (line == "Mecha line 8")
+                if (line == "Machine line 8")
                 {
                     count = _contextFac3Line8.McEtdModelDetails.Where(x => x.MId == data.NewModelCode).Count();
                     context = context.Where(x => (x.Model.Contains("1Y") || x.Model.Contains("2Y")) && x.Line == 8);
@@ -351,24 +386,24 @@ namespace WebApplication2.Controllers
             {
                 if (data.Line == "Machine")
                 {
-                    int contextProgramDetail = _contextFac2.McEtdProgramDetails.Where(x => x.ProId == data.ProId && x.MId == data.NewModelCode).Count();
+                    int contextProgramDetail = _contextFac2.EtdProgramDetails.Where(x => x.ProId == data.ProId && x.MId == data.NewModelCode).Count();
                     if (contextProgramDetail == 0)
                     {
-                        McEtdProgramDetail item = new McEtdProgramDetail();
+                        EtdProgramDetail item = new EtdProgramDetail();
                         item.MId = data.NewModelCode;
                         item.ProId = Convert.ToInt32(data.ProId);
-                        _contextFac2.McEtdProgramDetails.Add(item);
+                        _contextFac2.EtdProgramDetails.Add(item);
                         _contextFac2.SaveChanges();
                     }
-                    var contextMstModel = _contextFac2.McEtdMstModels.SingleOrDefault(x => x.MId == data.NewModelCode);
+                    var contextMstModel = _contextFac2.EtdMstModels.SingleOrDefault(x => x.MId == data.NewModelCode);
                     if (contextMstModel == null)
                     {
-                        McEtdMstModel item = new McEtdMstModel();
+                        EtdMstModel item = new EtdMstModel();
                         item.MId = data.NewModelCode;
                         item.MName = data.NewModelName;
                         item.MDate = DateTime.Now;
                         item.MUser = "IT";
-                        _contextFac2.McEtdMstModels.Add(item);
+                        _contextFac2.EtdMstModels.Add(item);
                         _contextFac2.SaveChanges();
                     }
                     else
@@ -381,13 +416,13 @@ namespace WebApplication2.Controllers
                     }
 
                     int countInsert = 0;
-                    var context = _contextFac2.McEtdModelDetails.Where(x => x.MId == data.MId).ToList();
+                    var context = _contextFac2.EtdModelDetails.Where(x => x.MId == data.MId).ToList();
                     foreach (var item in context)
                     {
                         item.MId = data.NewModelCode;
                         item.PDate = DateTime.Now;
                         item.PUser = "IT";
-                        int exist = _contextFac2.McEtdModelDetails.Where(x => x.MId == data.NewModelCode && x.PId == item.PId && x.PtId == item.PtId && x.RId == item.RId).Count();
+                        int exist = _contextFac2.EtdModelDetails.Where(x => x.MId == data.NewModelCode && x.PId == item.PId && x.PtId == item.PtId && x.RId == item.RId).Count();
                         if (exist == 0)
                         {
                             _contextFac2.Add(item);
@@ -462,7 +497,7 @@ namespace WebApplication2.Controllers
             }
             else if (data.Fac == "3")
             {
-                if (data.Line == "Mecha line 8")
+                if (data.Line == "Machine line 8")
                 {
                     int contextProgramDetail = _contextFac3Line8.McEtdProgramDetails.Where(x => x.ProId == data.ProId && x.MId == data.NewModelCode).Count();
                     if (contextProgramDetail == 0)
@@ -692,7 +727,7 @@ namespace WebApplication2.Controllers
                 }
                 else
                 {
-                    return Ok(_contextFac2.McEtdMstPrograms.ToList());
+                    return Ok(_contextFac2.EtdMstPrograms.ToList());
                 }
             }
             else if (prams.fac == "3")
@@ -761,7 +796,7 @@ namespace WebApplication2.Controllers
             {
                 if (line == "Machine")
                 {
-                    var context = _contextFac2.McEtdModelDetails.Where(x => x.MId == data.MId && x.PId == data.PId && x.PtId == data.PtId).FirstOrDefault();
+                    var context = _contextFac2.EtdModelDetails.Where(x => x.MId == data.MId && x.PId == data.PId && x.PtId == data.PtId).FirstOrDefault();
                     if (context != null)
                     {
                         context.PMidDimension = data.MidDimension;
@@ -788,7 +823,7 @@ namespace WebApplication2.Controllers
             }
             else if (fac == "3")
             {
-                if (line == "Mecha line 8")
+                if (line == "Machine line 8")
                 {
                     var context = _contextFac3Line8.McEtdModelDetails.Where(x => x.MId == data.MId && x.PId == data.PId && x.PtId == data.PtId).FirstOrDefault();
                     if (context != null)
@@ -840,7 +875,7 @@ namespace WebApplication2.Controllers
             {
                 if (line  == "Machine")
                 {
-                    var context = _contextFac2.McEtdModelDetails.SingleOrDefault(x => x.MId == data.MId && x.PtId == data.ptId && x.PId == data.pId && x.RId == data.rId);
+                    var context = _contextFac2.EtdModelDetails.SingleOrDefault(x => x.MId == data.MId && x.PtId == data.ptId && x.PId == data.pId && x.RId == data.rId);
                     if (context != null)
                     {
                         context.PStatus = !context.PStatus;
@@ -862,7 +897,7 @@ namespace WebApplication2.Controllers
                 }
             }else if (fac == "3")
             {
-                if (line == "Mecha line 8")
+                if (line == "Machine line 8")
                 {
                     var context = _contextFac3Line8.McEtdModelDetails.SingleOrDefault(x => x.MId == data.MId && x.PtId == data.ptId && x.PId == data.pId && x.RId == data.rId);
                     if (context != null)

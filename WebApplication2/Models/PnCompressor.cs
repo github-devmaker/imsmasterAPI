@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebApplication2.Models;
+namespace imsmasterApi.Models;
 
 public partial class PnCompressor
 {
@@ -44,6 +44,9 @@ public partial class PnCompressor
 
     public string? Rmk4 { get; set; }
 
+    /// <summary>
+    /// bit for check terminal cover
+    /// </summary>
     public string? Rmk5 { get; set; }
 
     public string? Rmk6 { get; set; }
@@ -54,5 +57,8 @@ public partial class PnCompressor
 
     public string? Rmk9 { get; set; }
 
+    /// <summary>
+    /// data for check original line (backflush)
+    /// </summary>
     public string? Rmk10 { get; set; }
 }
